@@ -116,9 +116,6 @@ AGENTIC-AI-SOC-AZURE/
 │   └── utilities.py
 ├── data/
 │   └── _threats.jsonl
-├── docs/
-├── examples/
-│   └── sample_threats.jsonl
 ├── .env
 ├── .env.example
 ├── .gitignore
