@@ -1,51 +1,26 @@
 # Agentic AI SOC Analyst for Azure
 
-An AI-assisted SOC workflow built in Python to help analysts investigate suspicious activity in Azure environments using Log Analytics, Microsoft Defender, and OpenAI.
+An AI-assisted SOC workflow built in Python to help analysts investigate suspicious activity in Azure environments using Azure Log Analytics, Microsoft Defender, and OpenAI.
 
-This project takes a natural language investigation question, selects the most relevant telemetry source, queries Azure Log Analytics, sends the results to an LLM for analysis, maps findings to MITRE ATT&CK, and returns structured threat findings. For high-confidence host-based threats, the workflow can also prompt the analyst to isolate the affected machine.
+This project demonstrates how a security analyst can use natural language to initiate an investigation, retrieve relevant Azure telemetry, analyze results with an LLM, map findings to MITRE ATT&CK, and produce structured threat findings for analyst review. For high-confidence host-based threats, the workflow can also prompt the analyst to isolate the affected endpoint through Microsoft Defender.
 
 ---
 
 ## Project Overview
 
-Security analysts often waste time switching between log sources, writing ad hoc queries, filtering noisy results, and manually summarizing findings.
+Security analysts often lose time switching between tools, writing one-off queries, filtering noisy logs, and manually summarizing findings.
 
-This project was built to simulate how an AI-assisted SOC analyst could:
+This project simulates how an AI-assisted SOC analyst could:
 
-- take an analyst’s investigation question in plain English
-- decide which log source to query
-- collect relevant telemetry from Azure Log Analytics
-- analyze the results with an LLM
-- produce structured findings with MITRE ATT&CK context
+- take an investigation question in plain English
+- determine the most relevant telemetry source
+- collect logs from Azure Log Analytics
+- analyze findings with an LLM
+- map results to MITRE ATT&CK
+- return structured threat findings
 - optionally support analyst-approved response actions
 
-The goal is not to replace analysts. The goal is to reduce manual triage time and make investigations more consistent.
-
----
-
-## What This Project Does
-
-The workflow supports an investigation flow like this:
-
-1. The analyst asks a question in plain language  
-   Example:  
-   `Is there any suspicious sign-in activity in the last 24 hours?`
-
-2. The agent determines:
-   - which table to search
-   - what fields to pull
-   - what time range to use
-   - whether the request is about a host, user, or network control
-
-3. The project queries Azure Log Analytics.
-
-4. The returned logs are inserted into a threat hunting prompt.
-
-5. The model analyzes the data and returns structured findings.
-
-6. Findings are displayed to the analyst and saved to JSONL.
-
-7. If a host-focused threat is high confidence, the analyst can choose whether to isolate the machine.
+The goal is not to replace analysts. The goal is to reduce manual triage time, improve consistency, and support faster threat investigation.
 
 ---
 
@@ -64,7 +39,7 @@ The workflow supports an investigation flow like this:
 
 ## Example Use Cases
 
-This project is especially useful for scenarios like:
+This project is designed for scenarios such as:
 
 - suspicious Azure sign-in activity
 - impossible travel detection
@@ -89,7 +64,7 @@ The workflow is organized into modular components:
   Counts tokens, compares models, estimates cost, and lets the user select a model
 
 - **executor.py**  
-  Queries Log Analytics, runs the hunt, and handles response actions
+  Queries Azure Log Analytics, runs the investigation flow, and handles response actions
 
 - **guardrails.py**  
   Restricts allowed models, tables, and fields
@@ -99,6 +74,17 @@ The workflow is organized into modular components:
 
 - **config.py**  
   Loads environment variables
+
+---
+
+## Tech Stack
+
+- Python
+- Azure Log Analytics
+- Microsoft Defender for Endpoint
+- OpenAI API
+- JSONL for structured threat logging
+- MITRE ATT&CK for threat mapping
 
 ---
 
@@ -116,7 +102,7 @@ AGENTIC-AI-SOC-AZURE/
 │   └── utilities.py
 ├── data/
 │   └── _threats.jsonl
-├── .env
 ├── .env.example
 ├── .gitignore
+├── README.md
 └── requirements.txt
