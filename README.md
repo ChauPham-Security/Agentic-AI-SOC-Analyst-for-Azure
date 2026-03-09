@@ -110,32 +110,37 @@ AGENTIC-AI-SOC-AZURE/
 
 ## Sample Investigation Flow
 
-1. **Analyst submits a security question in plain English**  
-   Example:  
-   `Is there any suspicious sign-in activity in the last 24 hours?`
+### 1. Analyst investigation prompt
+Shows the workflow accepting a natural language security investigation question and determining the relevant Azure log source, fields, and time range.
 
-![Sample investigation prompt screenshot](https://github.com/user-attachments/assets/200f38d1-9da1-40b3-93cd-745d806bb189)
+![Analyst investigation prompt](images/analyst-prompt.png)
 
-2. **The workflow interprets the investigation request**  
-   It determines:
-   - which telemetry table to search
-   - what fields to retrieve
-   - what time range to apply
-   - whether the investigation is **user-focused**, **host-focused**, or **network-focused**
+### 2. Log search parameter selection
+The workflow interprets the investigation request and determines:
+- which telemetry table to search
+- what fields to retrieve
+- what time range to apply
+- whether the investigation is **user-focused**, **host-focused**, or **network-focused**
 
-3. **Azure Log Analytics is queried**  
-   The system searches the relevant telemetry based on the investigation scope.
+![Log search parameter selection](images/Deciding-log-search-parameters.png)
 
-4. **Telemetry is inserted into a structured hunting prompt**  
-   The returned log data is formatted and passed into the investigation prompt.
+### 3. Azure Log Analytics query execution
+The system searches the relevant telemetry based on the investigation scope.
 
-5. **The model analyzes the results**  
-   It reviews the logs and returns structured findings for analyst review.
+### 4. Model selection and token validation
+Demonstrates token-aware model selection, estimated cost review, and validation against model input and rate limits before sending telemetry to the LLM.
 
-6. **Findings are saved and displayed**  
-   Results are:
-   - shown to the analyst
-   - written to `data/_threats.jsonl`
+![Model selection and token validation](images/Model-selection.png)
 
-7. **Optional endpoint isolation step**  
-   If the threat is **host-based** and confidence is high, the workflow can prompt the analyst to isolate the affected endpoint.
+### 5. Structured threat findings
+Displays the final investigation results, including threat title, description, confidence level, MITRE ATT&CK mapping, indicators of compromise, and recommended analyst actions.
+
+Results are:
+- shown to the analyst
+- written to `data/_threats.jsonl`
+
+![Structured threat findings 1](images/Structured-threat-findings-1.png)
+
+![Structured threat findings 2](images/Structured-threat-findings-2.png)
+
+![Structured threat findings 3](images/Structured-threat-findings-3.png)
