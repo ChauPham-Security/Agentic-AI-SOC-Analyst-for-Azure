@@ -88,24 +88,6 @@ The workflow is organized into modular components:
 
 ---
 
-## Current Project Structure
-
-```text
-AGENTIC-AI-SOC-AZURE/
-├── app/
-│   ├── config.py
-│   ├── executor.py
-│   ├── guardrails.py
-│   ├── main.py
-│   ├── model_management.py
-│   ├── prompt_management.py
-│   └── utilities.py
-├── data/
-│   └── _threats.jsonl
-├── .env.example
-├── .gitignore
-├── README.md
-└── requirements.txt
 
 
 ## Sample Investigation Flow
@@ -130,7 +112,7 @@ The system searches the relevant telemetry based on the investigation scope.
 ### 4. Model selection and token validation
 Demonstrates token-aware model selection, estimated cost review, and validation against model input and rate limits before sending telemetry to the LLM.
 
-![Model selection and token validation](images/Model-selection.png)
+![Model selection and token validation](images/Model-selection-and-token-validation.png)
 
 ### 5. Structured threat findings
 Displays the final investigation results, including threat title, description, confidence level, MITRE ATT&CK mapping, indicators of compromise, and recommended analyst actions.
