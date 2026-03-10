@@ -4,6 +4,9 @@ An AI-assisted SOC workflow built in Python to help analysts investigate suspici
 
 This project demonstrates how a security analyst can use natural language to initiate an investigation, retrieve relevant Azure telemetry, analyze results with an LLM, map findings to MITRE ATT&CK, and produce structured threat findings for analyst review. For high-confidence host-based threats, the workflow can also prompt the analyst to isolate the affected endpoint through Microsoft Defender.
 
+<img width="884" height="590" alt="Screenshot 2026-03-10 at 10 44 22 AM" src="https://github.com/user-attachments/assets/9293032e-8bf3-4809-b1f3-6cbaf6cb82d5" />
+
+
 ---
 
 ## Project Overview
