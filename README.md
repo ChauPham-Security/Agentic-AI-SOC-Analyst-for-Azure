@@ -21,6 +21,44 @@ This project simulates how an AI-assisted SOC analyst could:
 - optionally support analyst-approved response actions
 
 The goal is not to replace analysts. The goal is to reduce manual triage time, improve consistency, and support faster threat investigation.
+---
+
+## Sample Investigation Flow
+
+### 1. Analyst investigation prompt
+Shows the workflow accepting a natural language security investigation question and determining the relevant Azure log source, fields, and time range.
+
+![Analyst investigation prompt](images/analyst-prompt.png)
+
+### 2. Log search parameter selection
+The workflow interprets the investigation request and determines:
+- which telemetry table to search
+- what fields to retrieve
+- what time range to apply
+- whether the investigation is **user-focused**, **host-focused**, or **network-focused**
+
+![Log search parameter selection](images/Deciding-log-search-parameters.png)
+
+### 3. Azure Log Analytics query execution
+The system searches the relevant telemetry based on the investigation scope.
+
+### 4. Model selection and token validation
+Demonstrates token-aware model selection, estimated cost review, and validation against model input and rate limits before sending telemetry to the LLM.
+
+![Model selection and token validation](images/Model-selection-and-token-validation.png)
+
+### 5. Structured threat findings
+Displays the final investigation results, including threat title, description, confidence level, MITRE ATT&CK mapping, indicators of compromise, and recommended analyst actions.
+
+Results are:
+- shown to the analyst
+- written to `data/_threats.jsonl`
+
+![Structured threat findings 1](images/Structured-threat-findings-1.png)
+
+![Structured threat findings 2](images/Structured-threat-findings-2.png)
+
+![Structured threat findings 3](images/Structured-threat-findings-3.png)
 
 ---
 
@@ -85,44 +123,3 @@ The workflow is organized into modular components:
 - OpenAI API
 - JSONL for structured threat logging
 - MITRE ATT&CK for threat mapping
-
----
-
-
-
-## Sample Investigation Flow
-
-### 1. Analyst investigation prompt
-Shows the workflow accepting a natural language security investigation question and determining the relevant Azure log source, fields, and time range.
-
-![Analyst investigation prompt](images/analyst-prompt.png)
-
-### 2. Log search parameter selection
-The workflow interprets the investigation request and determines:
-- which telemetry table to search
-- what fields to retrieve
-- what time range to apply
-- whether the investigation is **user-focused**, **host-focused**, or **network-focused**
-
-![Log search parameter selection](images/Deciding-log-search-parameters.png)
-
-### 3. Azure Log Analytics query execution
-The system searches the relevant telemetry based on the investigation scope.
-
-### 4. Model selection and token validation
-Demonstrates token-aware model selection, estimated cost review, and validation against model input and rate limits before sending telemetry to the LLM.
-
-![Model selection and token validation](images/Model-selection-and-token-validation.png)
-
-### 5. Structured threat findings
-Displays the final investigation results, including threat title, description, confidence level, MITRE ATT&CK mapping, indicators of compromise, and recommended analyst actions.
-
-Results are:
-- shown to the analyst
-- written to `data/_threats.jsonl`
-
-![Structured threat findings 1](images/Structured-threat-findings-1.png)
-
-![Structured threat findings 2](images/Structured-threat-findings-2.png)
-
-![Structured threat findings 3](images/Structured-threat-findings-3.png)
