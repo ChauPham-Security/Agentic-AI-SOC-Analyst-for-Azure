@@ -20,7 +20,7 @@ This project simulates how an AI-assisted SOC analyst could:
 - return structured threat findings
 - optionally support analyst-approved response actions
 
-The goal is not to replace analysts. The goal is to reduce manual triage time, improve consistency, and support faster threat investigation.
+The goal is to reduce manual triage time, improve consistency, and support faster threat investigation.
 ---
 
 ## Sample Investigation Flow
